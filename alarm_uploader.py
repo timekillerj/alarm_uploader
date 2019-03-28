@@ -75,7 +75,7 @@ if __name__ == '__main__':
                     (_, type_names, path, filename) = event
                     if 'IN_CLOSE_WRITE' in type_names:
                         source = path + '/' + filename
-                        dest = rclone_remote + path.replace('/mnt/user','')
+                        dest = rclone_remote + path
 
                         logging.info('Uploading: {}'.format(source))
                         result = rclone.with_config(rconfig).copy(source, dest)
