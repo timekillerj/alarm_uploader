@@ -92,6 +92,9 @@ if __name__ == '__main__':
                             logging.error('CODE: {}'.format(result.get('code')))
                             logging.error('ERROR: {}'.format(result.get('error')))
         else:
+            if alarm_logged:
+                logging.info("Alarm resolved.")
+                alarm_logged = 0
+
             logging.debug("Inactive, sleeping")
-            alarm_logged = 0
             sleep(5)
