@@ -25,9 +25,12 @@ rclone_remote = os.environ['RCLONE_REMOTE']
 watch_dir = os.environ['WATCH_DIR']
 
 isy_url = 'https://' + isy_host + '/rest/vars/get/' + str(isy_vartype) + '/' + str(isy_varid)
+logging.debug('ISY url: {}'.format(isy_url))
+logging.debug('RCLONE remote: {}'.format(rclone_remote))
+logging.debug('watch_dir: {}'.format(watch_dir))
 
 # Rclone Settings
-rclone_conf = '/config/rclone.conf'
+rclone_conf = '/rclone.conf'
 with open(rclone_conf, 'r') as rclone_file:
     rconfig=rclone_file.read()
 
