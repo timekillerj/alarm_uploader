@@ -24,7 +24,7 @@ isy_varid = os.environ['ISY_VARID']
 rclone_remote = os.environ['RCLONE_REMOTE']
 watch_dir = os.environ['WATCH_DIR']
 
-isy_url = isy_host + '/rest/vars/get/' + str(isy_vartype) + '/' + str(isy_varid)
+isy_url = 'https://' + isy_host + '/rest/vars/get/' + str(isy_vartype) + '/' + str(isy_varid)
 
 # Rclone Settings
 rclone_conf = '/config/rclone.conf'
@@ -76,8 +76,9 @@ if __name__ == '__main__':
                     if 'IN_CLOSE_WRITE' in type_names:
                         source = path + '/' + filename
                         dest = rclone_remote + path
-
+                        
                         logging.info('Uploading: {}'.format(source))
+                        logging.debug('    to {}'.format(dest))
                         result = rclone.with_config(rconfig).copy(source, dest)
                         if result.get('error'):
                             logging.error('OUTPUT: {}'.format(result.get('out')))
