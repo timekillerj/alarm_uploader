@@ -39,7 +39,7 @@ with open(rclone_conf, 'r') as rclone_file:
 
 
 def simple_get(isy_url):
-    logging.info('Fetching {}'.format(isy_url))
+    logging.debug('Fetching {}'.format(isy_url))
     try:
         resp = requests.get(isy_url, auth=HTTPBasicAuth(isy_user, isy_pass), verify=False)
         if is_good_response(resp):
