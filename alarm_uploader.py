@@ -65,12 +65,13 @@ def alarm_active():
 
 if __name__ == '__main__':
     alarm_logged = 0
+    logging.debug('Setting up inotify on {}'.format(watch_dir))
+    i = inotify.adapters.InotifyTree(watch_dir)
     while True:
         if alarm_active():
             if not alarm_logged:
                 logging.info('Alarm Active!')
                 alarm_logged =1
-            i = inotify.adapters.InotifyTree(watch_dir)
             events = i.event_gen(yield_nones=False, timeout_s=1)
             events = list(events)
             if events:
