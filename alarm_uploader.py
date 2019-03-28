@@ -9,6 +9,9 @@ from time import sleep
 import xml.etree.ElementTree as ET
 import inotify.adapters
 import rclone
+import urllib3
+
+urllib3.disable_warnings(urllib3.exceptions.InsecureRequestWarning)
 
 log_level = os.environ['log_level']
 if log_level == 'debug':
