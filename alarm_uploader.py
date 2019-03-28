@@ -10,19 +10,19 @@ import xml.etree.ElementTree as ET
 import inotify.adapters
 import rclone
 
-log_level = os.environ['LOGGING']
+log_level = os.environ['log_level']
 if log_level == 'debug':
     logging.getLogger().setLevel(logging.DEBUG)
 else:
     logging.getLogger().setLevel(logging.INFO)
 
-isy_host = os.environ['ISY_HOST']
-isy_user = os.environ['ISY_USER']
-isy_pass = os.environ['ISY_PASS']
-isy_vartype = os.environ['ISY_VARTYPE']
-isy_varid = os.environ['ISY_VARID']
-rclone_remote = os.environ['RCLONE_REMOTE']
-watch_dir = os.environ['WATCH_DIR']
+isy_host = os.environ['isy_host']
+isy_user = os.environ['isy_user']
+isy_pass = os.environ['isy_pass']
+isy_vartype = os.environ['isy_vartype']
+isy_varid = os.environ['isy_varid']
+rclone_remote = os.environ['rclone_remote']
+watch_dir = os.environ['watch_dir']
 
 isy_url = 'https://' + isy_host + '/rest/vars/get/' + str(isy_vartype) + '/' + str(isy_varid)
 logging.debug('ISY url: {}'.format(isy_url))
