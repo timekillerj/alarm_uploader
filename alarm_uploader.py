@@ -58,6 +58,8 @@ def is_good_response(resp):
 
 def alarm_active():
     xml_response = simple_get(isy_url)
+    if not xml_response:
+        return False
     root = ET.fromstring(xml_response)
     for child in root:
         if child.tag == 'val':
