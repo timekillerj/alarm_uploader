@@ -15,9 +15,14 @@ urllib3.disable_warnings(urllib3.exceptions.InsecureRequestWarning)
 
 log_level = os.environ['log_level']
 if log_level == 'debug':
-    logging.getLogger().setLevel(logging.DEBUG)
+    logging_level = logging.DEBUG
 else:
-    logging.getLogger().setLevel(logging.INFO)
+    logging_level = logging.INFO
+
+logging.basicConfig(
+    format='%(asctime)s %(levelname)-8s %(message)s',
+    level=logging_level,
+    datefmt='%Y-%m-%d %H:%M:%S')
 
 isy_host = os.environ['isy_host']
 isy_user = os.environ['isy_user']
