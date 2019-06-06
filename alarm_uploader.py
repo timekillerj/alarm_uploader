@@ -78,6 +78,7 @@ if __name__ == '__main__':
     logging.info('Setting up inotify watch_dir {}'.format(watch_dir))
     i = inotify.adapters.InotifyTree(watch_dir)
     logging.info('inotify watch complete')
+    uploaded_files = 0
     while True:
         if alarm_active():
             if not alarm_logged:
@@ -92,17 +93,20 @@ if __name__ == '__main__':
                         source = path + '/' + filename
                         dest = rclone_remote + path
                         
-                        logging.info('Uploading: {}'.format(source))
+                        logging.debug('Uploading: {}'.format(source))
                         logging.debug('    to {}'.format(dest))
                         result = rclone.with_config(rconfig).copy(source, dest)
                         if result.get('error'):
                             logging.error('OUTPUT: {}'.format(result.get('out')))
                             logging.error('CODE: {}'.format(result.get('code')))
                             logging.error('ERROR: {}'.format(result.get('error')))
+                        else:
+                            uploaded_files += 1
         else:
             if alarm_logged:
-                logging.info("Alarm resolved.")
+                logging.info("Alarm resolved, uploaded {} files".format(uploaded_files))
                 alarm_logged = 0
+                uploaded_files = 0
 
             logging.debug("Inactive, sleeping")
             sleep(5)
